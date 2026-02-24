@@ -1,8 +1,18 @@
 import "./App.css";
 import CharacterGrid from "./components/CharacterGrid";
-import { hiragana, katakana } from "./kanaData.ts";
+import { kanaData } from "./data/kana.ts";
 
 function App() {
+    const hiraganaChars = kanaData.map((k) => ({
+        character: k.hiragana,
+        romaji: k.romaji,
+    }));
+
+    const katakanaChars = kanaData.map((k) => ({
+        character: k.katakana,
+        romaji: k.romaji,
+    }));
+
     return (
         <div className="app">
             <header className="app-header">
@@ -10,8 +20,8 @@ function App() {
             </header>
 
             <main>
-                <CharacterGrid title="Hiragana" characters={hiragana} />
-                <CharacterGrid title="Katakana" characters={katakana} />
+                <CharacterGrid title="Hiragana" characters={hiraganaChars} />
+                <CharacterGrid title="Katakana" characters={katakanaChars} />
             </main>
         </div>
     );

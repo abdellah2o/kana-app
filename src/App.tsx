@@ -17,7 +17,7 @@ function App() {
 
     const [script, setScript] = useState<'hiragana' | 'katakana'>('hiragana');
 
-    const [quizMode, setQuizMode] = useState(true);
+    const [quizMode, setQuizMode] = useState('study');
     const [currentCharacter, setCurrentCharacter] = useState<Kana | null>(null);
     const [userAnswer, setUserAnswer] = useState('');
     const [score, setScore] = useState({ correct: 0, total: 0 });
@@ -27,6 +27,10 @@ function App() {
         setCurrentCharacter(kanaData[index])
     }
 
+    function switchMode(newMode: 'study' | 'quiz') {
+        setQuizMode(newMode)
+    }
+
     return (
         <div className="app">
             <header className="app-header">
@@ -34,51 +38,12 @@ function App() {
             </header>
 
             <main>
-                <div>
-                    <label>
-                        <input
-                            type="radio"
-                            value="user"
-                            checked={script === 'hiragana'}
-                            onChange={() => setScript('hiragana')}
-                        />
-                        Hiragana
-                    </label>
+                <nav>
+                    <button onClick={() => switchMode('study')} disabled={quizMode == 'study'}>Etudier</button>
+                    <button onClick={() => switchMode('quiz')} disabled={quizMode == 'quiz'}>Quiz</button>
+                </nav>
 
-                    <label>
-                        <input
-                            type="radio"
-                            value="admin"
-                            checked={script === 'katakana'}
-                            onChange={() => setScript('katakana')}
-                        />
-                        Katakana
-                    </label>
-                </div>
-
-                <div>
-                    <label>
-                        <input
-                            type="radio"
-                            value="quiz"
-                            checked={quizMode}
-                            onChange={() => setQuizMode(true)}
-                        />
-                        Quiz
-                    </label>
-
-                    <label>
-                        <input
-                            type="radio"
-                            value="pasquiz"
-                            checked={!quizMode}
-                            onChange={() => setQuizMode(false)}
-                        />
-                        Révision
-                    </label>
-                </div>
-
-                {quizMode ? (
+                {quizMode == 'quiz' ? (
                     <div>
                         {script === 'hiragana' ? (
                             <h2>{currentCharacter?.hiragana}</h2>
@@ -95,6 +60,27 @@ function App() {
                     </div>
                 ) : (
                     <div>
+                        <div>
+                            <label>
+                                <input
+                                    type="radio"
+                                    value="user"
+                                    checked={script === 'hiragana'}
+                                    onChange={() => setScript('hiragana')}
+                                />
+                                Hiragana
+                            </label>
+
+                            <label>
+                                <input
+                                    type="radio"
+                                    value="admin"
+                                    checked={script === 'katakana'}
+                                    onChange={() => setScript('katakana')}
+                                />
+                                Katakana
+                            </label>
+                        </div>
                         {script === 'hiragana' ? (
                             <CharacterGrid title="Hiragana" characters={hiraganaChars}/>
                         ) : (

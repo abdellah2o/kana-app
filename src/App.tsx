@@ -1,34 +1,17 @@
 import "./App.css";
-import CharacterGrid from "./components/CharacterGrid";
 import { kanaData } from "./data/kana.ts";
 import {useState} from "react";
-import type {Kana} from "./data/kana.ts";
+import StudyMode from "./components/StudyMode.tsx";
+import QuizMode from "./components/QuizMode.tsx";
 
 function App() {
-    const hiraganaChars = kanaData.map((k) => ({
-        character: k.hiragana,
-        romaji: k.romaji,
-    }));
-
-    const katakanaChars = kanaData.map((k) => ({
-        character: k.katakana,
-        romaji: k.romaji,
-    }));
 
     const [script, setScript] = useState<'hiragana' | 'katakana'>('hiragana');
 
-    const [quizMode, setQuizMode] = useState('study');
-    const [currentCharacter, setCurrentCharacter] = useState<Kana | null>(null);
-    const [userAnswer, setUserAnswer] = useState('');
-    const [score, setScore] = useState({ correct: 0, total: 0 });
-
-    function pickRandomKana() {
-        const index = Math.floor(Math.random() * kanaData.length)
-        setCurrentCharacter(kanaData[index])
-    }
+    const [mode, setMode] = useState('study');
 
     function switchMode(newMode: 'study' | 'quiz') {
-        setQuizMode(newMode)
+        setMode(newMode)
     }
 
     return (
@@ -39,54 +22,14 @@ function App() {
 
             <main>
                 <nav>
-                    <button onClick={() => switchMode('study')} disabled={quizMode == 'study'}>Etudier</button>
-                    <button onClick={() => switchMode('quiz')} disabled={quizMode == 'quiz'}>Quiz</button>
+                    <button onClick={() => switchMode('study')} disabled={mode == 'study'}>Réviser</button>
+                    <button onClick={() => switchMode('quiz')} disabled={mode == 'quiz'}>Quiz</button>
                 </nav>
 
-                {quizMode == 'quiz' ? (
-                    <div>
-                        {script === 'hiragana' ? (
-                            <h2>{currentCharacter?.hiragana}</h2>
-                        ) : (
-                            <h2>{currentCharacter?.katakana}</h2>
-                        )}
-                        <input
-                            type={'text'}
-                            value={userAnswer}
-                            onChange={e => setUserAnswer(e.target.value)}
-                        />
-                        <p>val : {userAnswer}</p>
-                        <button onClick={pickRandomKana}>valider</button>
-                    </div>
+                {mode == 'quiz' ? (
+                    <QuizMode script={script} kanaData={kanaData}/>
                 ) : (
-                    <div>
-                        <div>
-                            <label>
-                                <input
-                                    type="radio"
-                                    value="user"
-                                    checked={script === 'hiragana'}
-                                    onChange={() => setScript('hiragana')}
-                                />
-                                Hiragana
-                            </label>
-
-                            <label>
-                                <input
-                                    type="radio"
-                                    value="admin"
-                                    checked={script === 'katakana'}
-                                    onChange={() => setScript('katakana')}
-                                />
-                                Katakana
-                            </label>
-                        </div>
-                        {script === 'hiragana' ? (
-                            <CharacterGrid title="Hiragana" characters={hiraganaChars}/>
-                        ) : (
-                            <CharacterGrid title="Katakana" characters={katakanaChars}/>
-                        )}
-                    </div>
+                    <StudyMode script={script} kanaData={kanaData} setScript={setScript}/>
                 )}
 
             </main>

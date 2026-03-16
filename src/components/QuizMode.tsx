@@ -7,7 +7,7 @@ interface QuizModeProps {
 }
 
 function QuizMode({ script, kanaData }: QuizModeProps) {
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(() => Math.floor(Math.random() * kanaData.length));
     const [userAnswer, setUserAnswer] = useState('');
     const [score, setScore] = useState({ correct: 0, total: 0 });
     const [feedback, setFeedback] = useState('');
@@ -37,7 +37,7 @@ function QuizMode({ script, kanaData }: QuizModeProps) {
         // Passer au suivant après un délai
         setTimeout(() => {
             if (!isEmpty){
-                setCurrentIndex((currentIndex + 1) % kanaData.length);
+                setCurrentIndex((Math.floor(Math.random() * kanaData.length)) % kanaData.length);
             }
             setFeedback('');
             setButtonActivation(true)

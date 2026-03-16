@@ -8,7 +8,7 @@ function App() {
 
     const [script, setScript] = useState<'hiragana' | 'katakana'>('hiragana');
 
-    const [mode, setMode] = useState('study');
+    const [mode, setMode] = useState<'study' | 'quiz'>('study');
 
     function switchMode(newMode: 'study' | 'quiz') {
         setMode(newMode)

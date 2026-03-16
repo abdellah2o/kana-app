@@ -2,7 +2,7 @@ import {type Kana} from "../data/kana.ts";
 import CharacterGrid from "./CharacterGrid.tsx";
 import type {Dispatch, SetStateAction} from "react";
 
-interface StudyModeProps {
+type StudyModeProps = {
     script: 'hiragana' | 'katakana'
     kanaData: Kana[]
     setScript: Dispatch<SetStateAction<'hiragana' | 'katakana'>>

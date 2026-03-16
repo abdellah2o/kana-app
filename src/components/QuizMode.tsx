@@ -1,29 +1,29 @@
 import {useState} from "react";
 import type {Kana} from "../data/kana.ts";
 
-interface QuizModeProps {
+type QuizModeProps = {
     script: 'hiragana' | 'katakana';
     kanaData: Kana[];
 }
 
 function QuizMode({ script, kanaData }: QuizModeProps) {
-    const [currentIndex, setCurrentIndex] = useState(() => Math.floor(Math.random() * kanaData.length));
-    const [userAnswer, setUserAnswer] = useState('');
-    const [score, setScore] = useState({ correct: 0, total: 0 });
-    const [feedback, setFeedback] = useState('');
+    const [currentIndex, setCurrentIndex] = useState<number>(() => Math.floor(Math.random() * kanaData.length));
+    const [userAnswer, setUserAnswer] = useState<string>('');
+    const [score, setScore] = useState<{correct: number, total: number}>({ correct: 0, total: 0 });
+    const [feedback, setFeedback] = useState<string>('');
 
-    const currentKana = kanaData[currentIndex];
-    const displayChar = script === 'hiragana'
+    const currentKana: Kana = kanaData[currentIndex];
+    const displayChar: string = script === 'hiragana'
         ? currentKana.hiragana
         : currentKana.katakana;
 
-    const [buttonActivation, setButtonActivation] = useState(true)
+    const [buttonActivation, setButtonActivation] = useState<boolean>(true)
 
     const handleSubmit = (e: React.SubmitEvent) => {
         e.preventDefault();
 
-        const isCorrect = userAnswer.toLowerCase().trim() === currentKana.romaji.toLowerCase();
-        const isEmpty = userAnswer.length === 0
+        const isCorrect: boolean = userAnswer.toLowerCase().trim() === currentKana.romaji.toLowerCase();
+        const isEmpty: boolean = userAnswer.length === 0;
 
         setScore({
             correct: score.correct + (isCorrect ? 1 : 0),

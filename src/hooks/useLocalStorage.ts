@@ -2,13 +2,25 @@ import { useState } from "react";
 
 function useLocalStorage(key: string, initialValue: number) {
     const [value, setValue] = useState<number>(() => {
-        const stored = localStorage.getItem(key);
-        return stored !== null ? parseInt(stored, 10) : initialValue;
+        try {
+            const stored = localStorage.getItem(key);
+            return stored !== null ? parseInt(stored, 10) : initialValue;
+        }
+        catch {
+            return initialValue;
+        }
     });
 
     function store(newValue: number) {
-        localStorage.setItem(key, String(newValue));
-        setValue(newValue);
+        try {
+            localStorage.setItem(key, String(newValue));
+        }
+        catch {
+            console.log("flop... tu n'as pas réussi à écrire dans le local storage.")
+        }
+        finally {
+            setValue(newValue);
+        }
     }
 
     return { value: value, setValue: store };

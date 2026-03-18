@@ -27,7 +27,7 @@ function App() {
                 </nav>
 
                 {mode == 'quiz' ? (
-                    <QuizMode script={script} kanaData={kanaData}/>
+                    <QuizMode kanaData={kanaData}/>
                 ) : (
                     <StudyMode script={script} kanaData={kanaData} setScript={setScript}/>
                 )}

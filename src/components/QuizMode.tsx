@@ -1,71 +1,43 @@
-import {useState} from "react";
 import type {Kana} from "../data/kana.ts";
+import useQuiz from "../hooks/useQuiz.ts";
+import {useEffect, useRef} from "react";
 
 type QuizModeProps = {
-    script: 'hiragana' | 'katakana';
     kanaData: Kana[];
 }
 
-function QuizMode({ script, kanaData }: QuizModeProps) {
-    const [currentIndex, setCurrentIndex] = useState<number>(() => Math.floor(Math.random() * kanaData.length));
-    const [userAnswer, setUserAnswer] = useState<string>('');
-    const [score, setScore] = useState<{correct: number, total: number}>({ correct: 0, total: 0 });
-    const [feedback, setFeedback] = useState<string>('');
+function QuizMode({ kanaData }: QuizModeProps) {
+    const quiz = useQuiz({script: 'hiragana', kanaData: kanaData});
 
-    const currentKana: Kana = kanaData[currentIndex];
-    const displayChar: string = script === 'hiragana'
-        ? currentKana.hiragana
-        : currentKana.katakana;
+    const inputRef = useRef<HTMLInputElement>(null);
 
-    const [buttonActivation, setButtonActivation] = useState<boolean>(true)
-
-    const handleSubmit = (e: React.SubmitEvent) => {
-        e.preventDefault();
-
-        const isCorrect: boolean = userAnswer.toLowerCase().trim() === currentKana.romaji.toLowerCase();
-        const isEmpty: boolean = userAnswer.length === 0;
-
-        setScore({
-            correct: score.correct + (isCorrect ? 1 : 0),
-            total: score.total + (isEmpty ? 0 : 1)
-        });
-
-        setFeedback(isEmpty ? 'Veuillez entrer un caractère' : isCorrect ? 'Correct !' : `Incorrect. C'était ${currentKana.romaji}`);
-        setUserAnswer('');
-        setButtonActivation(false)
-
-        // Passer au suivant après un délai
-        setTimeout(() => {
-            if (!isEmpty){
-                setCurrentIndex((Math.floor(Math.random() * kanaData.length)) % kanaData.length);
-            }
-            setFeedback('');
-            setButtonActivation(true)
-        }, 1500);
-    };
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, [quiz.currentIndex]);
 
     return (
         <div>
             <div className="score">
-                Score : {score.correct} / {score.total}
+                Score : {quiz.score.correct} / {quiz.score.total}
             </div>
 
             <div className="quiz-character">
-                <h2>{displayChar}</h2>
+                <h2>{quiz.displayChar}</h2>
             </div>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={quiz.handleSubmit}>
                 <input
+                    ref={inputRef}
                     type="text"
-                    value={userAnswer}
-                    onChange={e => setUserAnswer(e.target.value)}
+                    value={quiz.userAnswer}
+                    onChange={e => quiz.setUserAnswer(e.target.value)}
                     placeholder="Romaji..."
                     autoFocus
                 />
-                <button type="submit" disabled={!buttonActivation}>Valider</button>
+                <button type="submit" disabled={!quiz.buttonActivation}>Valider</button>
             </form>
 
-            {feedback && <div className="feedback">{feedback}</div>}
+            {quiz.feedback && <div className="feedback">{quiz.feedback}</div>}
         </div>
     );
 }

@@ -20,6 +20,9 @@ function QuizMode({ kanaData }: QuizModeProps) {
             <div className="score">
                 Score : {quiz.score.correct} / {quiz.score.total}
             </div>
+            <div className="meilleurScore">
+                Meilleur score : {quiz.storage.value}
+            </div>
 
             <div className="quiz-character">
                 <h2>{quiz.displayChar}</h2>

@@ -1,32 +1,347 @@
-body {
-  margin: 0 20px;
+/* CONTENEUR PRINCIPAL */
+
+.app-root {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 20px 32px;
+}
+
+/* NAVBAR (utilisée par FeaturesTab avec <nav>) */
+
+.app-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  margin: -16px -20px 24px;
+  padding: 10px 20px;
+}
+
+.app-navbar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.app-navbar-logo {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #193561;
+}
+
+/* Liste de liens de nav (FeaturesTab) */
+
+.app-navbar-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Lien/onglet de nav web 2.0 */
+
+.app-navbar-link {
+  display: inline-block;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 0.35em 1.1em;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: linear-gradient(
+          135deg,
+          #3b6aba 0%,
+          #295396 50%,
+          #17315e 100%
+  );
+  color: #f5f7fb; /* gris très clair sur bleu sombre */
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition:
+          transform 0.1s ease,
+          box-shadow 0.1s ease,
+          filter 0.15s ease;
+}
+
+.app-navbar-link--active {
+  filter: brightness(1.1);
+}
+
+.app-navbar-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+}
+
+.app-navbar-link:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.22);
+}
+
+/* HEADER DE PAGE (titre + sous-titre) */
+
+.app-header {
+  margin-top: 4px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.app-title {
+  margin: 0 0 6px;
+  font-size: 2.1rem;
+  color: #193561;
+}
+
+.app-subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #5b6579;
+}
+
+/* SECTIONS DE CONTENU (Study, Quiz, Features…) */
+
+.app-content-section {
+  margin-bottom: 28px;
+}
+
+/* ONGLET/BOUTONS POUR CHOIX DE MODE */
+
+.app-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 12px 0 24px;
+}
+
+.app-tab-button {
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 0.45em 1.35em;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background: linear-gradient(
+          135deg,
+          #fdfefe 0%,
+          #f0f4fc 45%,
+          #dbe5f9 100%
+  );
+  color: #295396;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition:
+          transform 0.1s ease,
+          box-shadow 0.1s ease,
+          background 0.15s ease,
+          border-color 0.15s ease;
+}
+
+.app-tab-button--active {
+  background: linear-gradient(
+          135deg,
+          #3b6aba 0%,
+          #295396 50%,
+          #17315e 100%
+  );
+  color: #f5f7fb;
+  border-color: rgba(41, 83, 150, 0.4);
+}
+
+.app-tab-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.14);
+}
+
+.app-tab-button:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.18);
+}
+
+/* PANELS D'INFO */
+
+.info-panel {
+  margin: 16px 0 20px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #f3f6fb;
+  border: 1px solid #d7dfef;
+  color: #193561;
+  font-size: 0.92rem;
+}
+
+/* Panel sur fond bleu sombre */
+
+.panel-dark {
+  margin: 16px 0 20px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: #193561;
+  color: #f5f7fb; /* gris très clair sur bleu sombre */
+}
+
+/* CARTES CLIQUABLES GÉNÉRIQUES (web 2.0) */
+
+.clickable-card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 14px 12px;
+  cursor: pointer;
+  transition:
+          transform 0.08s ease,
+          box-shadow 0.08s ease,
+          border-color 0.12s ease;
+}
+
+.clickable-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.16);
+  border-color: rgba(41, 83, 150, 0.25);
+}
+
+.clickable-card:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* GRILLE DES KANA */
+
+.character-grid-wrapper {
+  display: flex;
+  justify-content: center;
 }
 
 .character-grid__list {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
 }
 
+/* CARTE D'UN KANA */
+
 .character-card {
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 10px;
-  background: #f9f9f9;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.12);
+  padding: 10px 8px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition:
+          transform 0.08s ease,
+          box-shadow 0.08s ease,
+          border-color 0.12s ease,
+          background 0.12s ease;
 }
+
+.character-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+  border-color: rgba(41, 83, 150, 0.25);
+  background: #f6f8fd;
+}
+
+.character-card:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.22);
+}
+
+/* TYPO JAPONAIS + ROMAJI */
 
 .jp-char {
   font-size: 2.2rem;
   line-height: 1;
+  color: #193561; /* japonais en bleu sombre */
 }
 
 .jp-romaji {
   margin-top: 4px;
   font-size: 0.9rem;
-  color: #555;
+  color: #193561; /* romaji en bleu sombre aussi */
+}
+
+/* BOUTONS SECONDAIRES (reset, skip…) */
+
+.btn-secondary {
+  background: linear-gradient(135deg, #fdfdfd 0%, #f4f7fc 100%);
+  color: #295396;
+  border: 1px solid #c2cee5;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.btn-secondary:hover {
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.14);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .app-root {
+    padding: 12px 14px 24px;
+  }
+
+  .app-navbar {
+    margin: -12px -14px 20px;
+    padding-inline: 14px;
+  }
+
+  .app-navbar-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .app-navbar-links {
+    justify-content: center;
+  }
+
+  .app-header {
+    margin-bottom: 18px;
+  }
+
+  .app-title {
+    font-size: 1.8rem;
+  }
+
+  .app-content-section {
+    margin-bottom: 22px;
+  }
+
+  .character-grid__list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .character-grid__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .character-card {
+    padding: 8px 6px;
+  }
+
+  .jp-char {
+    font-size: 2rem;
+  }
+
+  .app-tabs {
+    gap: 8px;
+  }
+
+  .app-tab-button {
+    padding-inline: 1.1em;
+    font-size: 0.9rem;
+  }
 }

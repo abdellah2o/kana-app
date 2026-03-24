@@ -3,16 +3,11 @@ import { kanaData } from "./data/kana.ts";
 import {useState} from "react";
 import StudyMode from "./components/StudyMode.tsx";
 import QuizMode from "./components/QuizMode.tsx";
+import FeaturesTab from "./components/FeaturesTab.tsx";
+import {Route, Routes} from "react-router-dom";
 
 function App() {
-
     const [script, setScript] = useState<'hiragana' | 'katakana'>('hiragana');
-
-    const [mode, setMode] = useState<'study' | 'quiz'>('study');
-
-    function switchMode(newMode: 'study' | 'quiz') {
-        setMode(newMode)
-    }
 
     return (
         <div className="app">
@@ -21,21 +16,15 @@ function App() {
             </header>
 
             <main>
-                <nav>
-                    <button onClick={() => switchMode('study')} disabled={mode == 'study'}>Réviser</button>
-                    <button onClick={() => switchMode('quiz')} disabled={mode == 'quiz'}>Quiz</button>
-                </nav>
+                <FeaturesTab/>
 
-                {mode == 'quiz' ? (
-                    <QuizMode kanaData={kanaData}/>
-                ) : (
-                    <StudyMode script={script} kanaData={kanaData} setScript={setScript}/>
-                )}
-
+                <Routes>
+                    <Route path="/study" element={<StudyMode script={script} kanaData={kanaData} setScript={setScript}/>}/>
+                    <Route path="/quiz" element={<QuizMode kanaData={kanaData}/>}/>
+                </Routes>
             </main>
         </div>
     );
 }
-
 
 export default App;

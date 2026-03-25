@@ -10,18 +10,21 @@ function App() {
     const [script, setScript] = useState<'hiragana' | 'katakana'>('hiragana');
 
     return (
-        <div className="app">
+        <div className="app-root">
             <header className="app-header">
-                <h1>Apprentissage du Japonais - Kana</h1>
+                <h1 className="app-title">Apprentissage du Japonais - Kana</h1>
+                <p className="app-subtitle">Entraînement aux hiragana et katakana</p>
             </header>
 
             <main>
                 <FeaturesTab/>
 
-                <Routes>
-                    <Route path="/study" element={<StudyMode script={script} kanaData={kanaData} setScript={setScript}/>}/>
-                    <Route path="/quiz" element={<QuizMode kanaData={kanaData}/>}/>
-                </Routes>
+                <section className="app-content-section">
+                    <Routes>
+                        <Route path="/study" element={<StudyMode script={script} kanaData={kanaData} setScript={setScript}/>}/>
+                        <Route path="/quiz" element={<QuizMode kanaData={kanaData}/>}/>
+                    </Routes>
+                </section>
             </main>
         </div>
     );

@@ -12,17 +12,20 @@ type CharacterGridProps = {
 
 function CharacterGrid({ title, characters }: CharacterGridProps) {
     return (
-        <section className="character-grid">
-            <h2>{title}</h2>
-            <div className="character-grid__list">
-                {characters.map((item, index) => (
-                    <CharacterCard
-                        key={index}
-                        character={item.character}
-                        romaji={item.romaji}
-                    />
-                ))}
+        <section className="character-grid-wrapper">
+            <div className="character-grid">
+                <h2>{title}</h2>
+                <div className="character-gridlist">
+                    {characters.map((item, index) => (
+                        <CharacterCard
+                            key={index}
+                            character={item.character}
+                            romaji={item.romaji}
+                        />
+                    ))}
+                </div>
             </div>
+
         </section>
     );
 }

@@ -22,7 +22,7 @@ function StudyMode({script, kanaData, setScript}: StudyModeProps) {
 
     return (
         <>
-            <div>
+            <div className="app-tabs">
                 <label>
                     <input
                         type="radio"
@@ -30,7 +30,7 @@ function StudyMode({script, kanaData, setScript}: StudyModeProps) {
                         checked={script === 'hiragana'}
                         onChange={() => setScript('hiragana')}
                     />
-                    Hiragana
+                    <span className="app-tab-button">Hiragana</span>
                 </label>
 
                 <label>
@@ -40,15 +40,17 @@ function StudyMode({script, kanaData, setScript}: StudyModeProps) {
                         checked={script === 'katakana'}
                         onChange={() => setScript('katakana')}
                     />
-                    Katakana
+                    <span className="app-tab-button">Katakana</span>
                 </label>
             </div>
 
-            {script == 'hiragana' ? (
-                <CharacterGrid title={'Hiragana'} characters={hiraganaChars}/>
-            ) : (
-                <CharacterGrid title={'Katakana'} characters={katakanaChars}/>
-            )}
+            <section className="app-content-section">
+                {script == 'hiragana' ? (
+                    <CharacterGrid title={'Hiragana'} characters={hiraganaChars}/>
+                ) : (
+                    <CharacterGrid title={'Katakana'} characters={katakanaChars}/>
+                )}
+            </section>
         </>
     )
 }

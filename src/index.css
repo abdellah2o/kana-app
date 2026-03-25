@@ -41,7 +41,6 @@ body {
 }
 
 /* Liens génériques */
-
 a {
   color: var(--primary);
   text-decoration: none;
@@ -54,7 +53,6 @@ a:hover {
 }
 
 /* Bouton générique web 2.0 */
-
 button {
   border-radius: 999px;
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -94,8 +92,36 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
-/* Responsive global */
+/* Inputs texte génériques (dont quiz) */
+input[type="text"] {
+  width: 100%;
+  max-width: 280px;
+  padding: 0.6em 0.9em;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  font-size: 1rem;
+  font-family: inherit;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition:
+          box-shadow 0.15s ease,
+          border-color 0.15s ease,
+          background-color 0.15s ease;
+}
 
+/* Espacement avec le bouton submit juste après */
+form input[type="text"] + button {
+  margin-left: 10px;
+}
+
+/* Focus plus moderne */
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(41, 83, 150, 0.16);
+  background-color: #f8faff;
+}
+
+/* Responsive global */
 @media (max-width: 768px) {
   body {
     align-items: stretch;

@@ -120,6 +120,15 @@
   margin: 12px 0 24px;
 }
 
+/* On part du principe que l’input radio est juste avant l’élément
+   visuel (span/app-tab-button) dans un <label> */
+
+.app-tabs input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .app-tab-button {
   border-radius: 999px;
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -142,6 +151,7 @@
           border-color 0.15s ease;
 }
 
+/* Actif via JS (ancienne version) */
 .app-tab-button--active {
   background: linear-gradient(
           135deg,
@@ -151,6 +161,19 @@
   );
   color: #f5f7fb;
   border-color: rgba(41, 83, 150, 0.4);
+}
+
+/* Actif via radio:checked (nouvelle version) */
+.app-tabs input[type="radio"]:checked + .app-tab-button {
+  background: linear-gradient(
+          135deg,
+          #2e4d8f 0%,
+          #193561 50%,
+          #10213a 100%
+  );
+  color: #f5f7fb;
+  border-color: rgba(25, 53, 97, 0.6);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .app-tab-button:hover {
@@ -183,6 +206,14 @@
   border-radius: 12px;
   background: #193561;
   color: #f5f7fb; /* gris très clair sur bleu sombre */
+}
+
+.quiz-feedback {
+  margin-top: 8px;
+  color: #193561;          /* bleu foncé */
+  font-size: 0.98rem;
+  font-weight: 600;        /* un peu plus épais */
+  letter-spacing: 0.01em;  /* très léger écartement */
 }
 
 /* CARTES CLIQUABLES GÉNÉRIQUES (web 2.0) */
@@ -218,6 +249,18 @@
   justify-content: center;
 }
 
+.character-grid {
+  width: 100%;
+  max-width: 700px;
+}
+
+.character-grid h2 {
+  margin: 0 0 12px;
+  font-size: 1.3rem;
+  color: #193561;
+}
+
+.character-gridlist,
 .character-grid__list {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -317,6 +360,7 @@
     margin-bottom: 22px;
   }
 
+  .character-gridlist,
   .character-grid__list {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 10px;
@@ -324,6 +368,7 @@
 }
 
 @media (max-width: 480px) {
+  .character-gridlist,
   .character-grid__list {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
